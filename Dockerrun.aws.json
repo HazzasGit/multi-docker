@@ -1,0 +1,35 @@
+{
+ "AWSEBDockerrunVersion": 2,
+ "containerDefinitions": [
+       {
+       "name": "client",
+       "image": "harrisonrober/multi-client",
+       "hostname": "client",
+       "essential": false
+   },
+   {
+	"name": "server",
+        "image": "harrisonrober/multi-server",
+        "hostname": "api",
+        "essential": false	
+   },
+   {
+	"name": "worker",
+        "image": "harrisonrober/multi-worker",
+	"hostname": "worker",
+	"essential": false
+   },
+   {
+	"name": "nginx",
+        "image": "harrisonrober/multi-nginx",
+	"essential": true,
+	"portMappings": [
+		{
+			"hostPort": 80,
+			"containerPort": 80
+		}
+	],
+	"links": ["client", "server"]
+   }
+ ]  
+}
